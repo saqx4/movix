@@ -23,7 +23,7 @@ A modern streaming platform built with React and Vite, featuring movies and TV s
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/movix.git
+git clone https://github.com/sa.qx4/movix.git
 ```
 
 2. Install dependencies:
