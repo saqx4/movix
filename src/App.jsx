@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MovieDetails from './pages/MovieDetails';
 import TVShowDetails from './pages/TVShowDetails';
@@ -16,6 +16,7 @@ function App() {
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/tv/:id" element={<TVShowDetails />} />
           <Route path="/browse/:type/:category" element={<Browse />} />
+          <Route path="/search" element={<Browse />} />
         </Routes>
       </div>
     </Router>
