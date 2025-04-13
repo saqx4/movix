@@ -59,7 +59,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative" ref={searchRef}>
+    <div className="relative w-full md:w-auto" ref={searchRef}>
       <div className="flex items-center bg-secondary/80 backdrop-blur-sm rounded-lg px-4 py-2">
         {isLoading ? (
           <FaSpinner className="text-gray-400 mr-2 animate-spin" />
@@ -71,7 +71,7 @@ const Search = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search movies and TV shows..."
-          className="bg-transparent text-white outline-none w-64 placeholder-gray-400"
+          className="bg-transparent text-white outline-none w-full md:w-64 placeholder-gray-400"
           autoComplete="off"
         />
         {query && (

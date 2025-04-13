@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Search from './Search';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/90 backdrop-blur-sm border-b border-white/10">
       <div className="container mx-auto px-4">
@@ -26,7 +30,8 @@ const Navbar = () => {
             </span>
           </Link>
           
-          <div className="flex items-center gap-8">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
             <Link to="/browse/movie/popular" className="text-white/80 hover:text-white transition-colors">
               Movies
             </Link>
@@ -35,6 +40,35 @@ const Navbar = () => {
             </Link>
             <Search />
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+          >
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} py-4 space-y-4`}>
+          <div className="mb-4">
+            <Search />
+          </div>
+          <Link 
+            to="/browse/movie/popular" 
+            className="block px-2 py-2 text-white/80 hover:text-white transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Movies
+          </Link>
+          <Link 
+            to="/browse/tv/popular" 
+            className="block px-2 py-2 text-white/80 hover:text-white transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            TV Shows
+          </Link>
         </div>
       </div>
     </nav>
