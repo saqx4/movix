@@ -1,106 +1,42 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa';
-import Logo from './Logo';
-import Disclaimer from './Disclaimer';
+import { Link } from 'react-router-dom';
+import Search from './Search';
 
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const navigate = useNavigate();
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/80 backdrop-blur-md shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/90 backdrop-blur-sm border-b border-white/10">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Logo />
-
-          {/* Search Bar */}
-          <form 
-            onSubmit={handleSearch}
-            className={`flex-1 max-w-xl mx-8 relative ${
-              isSearchFocused ? 'flex' : 'hidden md:flex'
-            }`}
-          >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setIsSearchFocused(false)}
-              placeholder="Search movies and TV shows..."
-              className="w-full px-4 py-2 bg-gray-900/50 text-white rounded-full 
-                       border border-gray-700 focus:border-accent focus:outline-none
-                       placeholder:text-gray-400"
-            />
-            <button
-              type="submit"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 
-                       hover:text-accent transition-colors"
-            >
-              <FaSearch />
-            </button>
-          </form>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link 
-              to="/browse/movie/popular" 
-              className="text-gray-300 hover:text-accent transition-colors"
-            >
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded bg-gradient-to-br from-accent via-purple-500 to-pink-500 p-[2px]">
+              <div className="w-full h-full bg-primary rounded flex items-center justify-center">
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="w-5 h-5 text-accent group-hover:text-white transition-colors"
+                  fill="currentColor"
+                >
+                  <path d="M4 8h16v8h-16zM2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-12c0-1.1-.9-2-2-2h-16c-1.1 0-2 .9-2 2z"/>
+                </svg>
+              </div>
+            </div>
+            <span className="text-2xl font-bold">
+              <span className="bg-gradient-to-r from-accent via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                Mov
+              </span>
+              <span className="text-white">ix</span>
+            </span>
+          </Link>
+          
+          <div className="flex items-center gap-8">
+            <Link to="/browse/movie/popular" className="text-white/80 hover:text-white transition-colors">
               Movies
             </Link>
-            <Link 
-              to="/browse/tv/popular" 
-              className="text-gray-300 hover:text-accent transition-colors"
-            >
+            <Link to="/browse/tv/popular" className="text-white/80 hover:text-white transition-colors">
               TV Shows
             </Link>
-            <Disclaimer />
+            <Search />
           </div>
-
-          {/* Mobile Search Toggle */}
-          <button
-            onClick={() => setIsSearchFocused(prev => !prev)}
-            className="md:hidden text-gray-300 hover:text-accent transition-colors"
-          >
-            {isSearchFocused ? <FaTimes size={20} /> : <FaSearch size={20} />}
-          </button>
         </div>
       </div>
-
-      {/* Mobile Search Bar */}
-      {isSearchFocused && (
-        <div className="md:hidden px-4 pb-4">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search movies and TV shows..."
-              className="w-full px-4 py-2 bg-gray-900/50 text-white rounded-full 
-                       border border-gray-700 focus:border-accent focus:outline-none
-                       placeholder:text-gray-400"
-              autoFocus
-            />
-            <button
-              type="submit"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 
-                       hover:text-accent transition-colors"
-            >
-              <FaSearch />
-            </button>
-          </form>
-        </div>
-      )}
     </nav>
   );
 };

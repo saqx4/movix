@@ -4,6 +4,7 @@ import MovieDetails from './pages/MovieDetails';
 import TVShowDetails from './pages/TVShowDetails';
 import Navbar from './components/Navbar';
 import Browse from './pages/Browse';
+import SearchResults from './pages/SearchResults';
 import './App.css'
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/tv/:id" element={<TVShowDetails />} />
           <Route path="/browse/:type/:category" element={<Browse />} />
-          <Route path="/search" element={<Browse />} />
+          <Route path="/search" element={<SearchResults />} />
         </Routes>
       </div>
     </Router>
