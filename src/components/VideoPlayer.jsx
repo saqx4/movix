@@ -55,15 +55,24 @@ const VideoPlayer = ({ type, id, season, episode }) => {
   }, []);
 
   return (
-    <div className="relative w-full bg-black">
-      <div className="relative pt-[56.25%]">
+    <div className="fixed inset-0 z-50 bg-black">
+      <div className="relative w-full h-full">
         {/* Video Player */}
         <iframe
           src={getVideoUrl()}
-          className="absolute inset-0 w-full h-full"
+          className="w-full h-full"
           frameBorder="0"
           allowFullScreen
           onLoad={() => setIsLoading(false)}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            backgroundColor: '#000'
+          }}
         />
 
         {/* Loading Overlay */}
@@ -74,20 +83,20 @@ const VideoPlayer = ({ type, id, season, episode }) => {
         )}
 
         {/* Server Selection */}
-        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10" ref={menuRef}>
+        <div className="absolute top-4 right-4 z-10" ref={menuRef}>
           <div className="relative">
             <button
               onClick={() => setShowServerMenu(!showServerMenu)}
-              className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-900/80 backdrop-blur-sm rounded-lg
-                       text-white text-xs sm:text-sm font-medium hover:bg-gray-800/80 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-900/80 backdrop-blur-sm rounded-lg
+                       text-white text-sm font-medium hover:bg-gray-800/80 transition-colors"
             >
-              <FaServer className="text-xs sm:text-sm" />
+              <FaServer className="text-sm" />
               <span className="truncate max-w-[100px] sm:max-w-none">{SERVERS[activeServer].name}</span>
             </button>
 
             {/* Server Menu */}
             {showServerMenu && (
-              <div className="absolute top-full right-0 mt-1 sm:mt-2 w-40 sm:w-48 bg-gray-900/95 backdrop-blur-sm 
+              <div className="absolute top-full right-0 mt-2 w-48 bg-gray-900/95 backdrop-blur-sm 
                            rounded-lg shadow-lg overflow-hidden border border-gray-700/50">
                 {Object.entries(SERVERS).map(([key, server]) => (
                   <button
@@ -96,7 +105,7 @@ const VideoPlayer = ({ type, id, season, episode }) => {
                       setActiveServer(key);
                       setShowServerMenu(false);
                     }}
-                    className={`w-full px-3 sm:px-4 py-1.5 sm:py-2 text-left text-xs sm:text-sm transition-colors
+                    className={`w-full px-4 py-2 text-left text-sm transition-colors
                               ${activeServer === key 
                                 ? 'bg-accent text-white' 
                                 : 'text-gray-300 hover:bg-gray-800/80'
